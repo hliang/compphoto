@@ -15,6 +15,9 @@ def greyscale(image):
   '''
   output = None
   # Insert your code here.----------------------------------------------------
+  output = image.sum(axis=2)  # average of 3 channels. # equivalent function: output = np.sum(image, axis=2 ) 
+  output = output/3  # scale
+  output = output.astype(np.uint8) # change dtype
 
   #---------------------------------------------------------------------------
   return output
