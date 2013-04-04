@@ -26,7 +26,14 @@ def filter_median(image, k):
   '''
   output = None
   # Insert your code here.----------------------------------------------------
- 
+  imageX = image.shape[0]
+  imageY = image.shape[1]
+  output = np.zeros((imageX-2*k, imageY-2*k), dtype=image.dtype)
+  for i in range(imageX):
+    for j in range(imageY):
+      thisarray = image[i:i+2*k+1, j:j+2*k+1]
+      if thisarray.shape[0] == 2*k+1 and thisarray.shape[1] == 2*k+1:
+        output[i,j] = np.median(thisarray)
   #---------------------------------------------------------------------------
   return output 
 
