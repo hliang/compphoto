@@ -31,6 +31,13 @@ def make_sharp(k, sd):
   '''
   kernel = None
   # Insert your code here.----------------------------------------------------
+  # gaussian filter:
+  import part1
+  gaussian_2d = part1.make_gaussian(k, sd)
+
+  kernel = np.zeros((2*k+1, 2*k+1), dtype=float) # create an array, each point has value=0
+  kernel[k,k] = 2  # value = 2 in the center
+  kernel = kernel - gaussian_2d  # subtract the gaussian filter
 
   #---------------------------------------------------------------------------
   return kernel
