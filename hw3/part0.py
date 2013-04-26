@@ -53,12 +53,13 @@ def expand(image):
   '''
   out = None
   # Insert your code here ------------------------------------------------------
-  numr = image.shape[0]
-  numc = image.shape[1]
+  # numr = image.shape[0]
+  # numc = image.shape[1]
   out = np.zeros((image.shape[0]*2, image.shape[1]*2), dtype = image.dtype )
   # spaced image
-  for r in range(0, image.shape[0]):
-    out[r*2][::2] = image[r]
+  # for r in range(0, image.shape[0]):
+  #   out[r*2][::2] = image[r]
+  out[::2, ::2] = image
   # filter with kernel
   kernel = generating_kernel(0.4)
   out = scipy.signal.convolve2d(out, kernel, mode='same')
