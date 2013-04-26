@@ -26,13 +26,15 @@ def reduce(image):
   # Insert your code here ------------------------------------------------------
   numr = image.shape[0]
   numc = image.shape[1]
-  out = np.zeros((np.ceil(numr/2.0), np.ceil(numc/2.0)), dtype = image.dtype )
+  # out = np.zeros((np.ceil(numr/2.0), np.ceil(numc/2.0)), dtype = image.dtype )
   # filter with kernel
   kernel = generating_kernel(0.4)
-  filter_img = scipy.signal.convolve(image, kernel, 'same')
+  filter_img = scipy.signal.convolve2d(image, kernel, mode='same')
   # sample every other point
-  for r in range(0, image.shape[0], 2):
-    out[r/2][:] = filter_img[r][::2]
+  # for r in range(0, image.shape[0], 2):
+  #   out[r/2][:] = filter_img[r][::2]
+  # an elegant way of subsampling:
+  out = filter_img[::2, ::2]
   # ----------------------------------------------------------------------------
   return out
   
@@ -59,9 +61,9 @@ def expand(image):
     out[r*2][::2] = image[r]
   # filter with kernel
   kernel = generating_kernel(0.4)
-  out = 2*scipy.signal.convolve(out, kernel, 'same')
+  out = scipy.signal.convolve2d(out, kernel, mode='same')
   # scaleup
-  out = out*2
+  out = out*4
   # ----------------------------------------------------------------------------
   return out
 
