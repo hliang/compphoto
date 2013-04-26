@@ -21,7 +21,10 @@ def gauss_pyramid(image, levels):
   '''
   output = []
   # Insert your code here ------------------------------------------------------
-
+  output.append(image)
+  for i in range(levels):
+    layer = part0.reduce(output[-1])
+    output.append(layer)
   # ----------------------------------------------------------------------------
   return output
 
@@ -50,7 +53,10 @@ def lapl_pyramid(gauss_pyr):
   '''
   output = []
   # Insert your code here ------------------------------------------------------
-
+  for k in range(len(gauss_pyr)-1):
+    layer = gauss_pyr[k] - part0.expand(gauss_pyr[k+1])[0:gauss_pyr[k].shape[0], 0:gauss_pyr[k].shape[1]]
+    output.append(layer)
+  output.append(gauss_pyr[-1])
   # ----------------------------------------------------------------------------
   return output
 
