@@ -31,7 +31,9 @@ def blend(lapl_pyr_white, lapl_pyr_black, gauss_pyr_mask):
 
   blended_pyr = []
   # Insert your code here ------------------------------------------------------
-
+  for i in range(len(lapl_pyr_white)):
+    layer = lapl_pyr_white[i] * gauss_pyr_mask[i] + lapl_pyr_black[i] * (1 - gauss_pyr_mask[i])
+    blended_pyr.append(layer)
   # ----------------------------------------------------------------------------
   return blended_pyr
 
@@ -53,7 +55,12 @@ def collapse(lapl_pyr):
   '''
   output = None
   # Insert your code here ------------------------------------------------------
-
+  for i in range(len(lapl_pyr)-1, 0, -1):
+    # expand layer k and add to layer k-1
+    (expand_to_r, expand_to_c) = (lapl_pyr[i-1].shape[0], lapl_pyr[i-1].shape[1])
+    lapl_pyr[i-1] = part0.expand(lapl_pyr[i])[0:expand_to_r, 0:expand_to_c] + lapl_pyr[i-1]
+  # only base layer should be returned
+  output = lapl_pyr[0]
   # ----------------------------------------------------------------------------
   return output
 
