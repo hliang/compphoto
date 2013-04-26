@@ -24,8 +24,8 @@ def reduce(image):
   '''
   out = None
   # Insert your code here ------------------------------------------------------
-  numr = image.shape[0]
-  numc = image.shape[1]
+  # numr = image.shape[0]
+  # numc = image.shape[1]
   # out = np.zeros((np.ceil(numr/2.0), np.ceil(numc/2.0)), dtype = image.dtype )
   # filter with kernel
   kernel = generating_kernel(0.4)
