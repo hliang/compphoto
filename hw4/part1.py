@@ -30,7 +30,10 @@ def diff2(diff1):
   '''
   output = None
   # Insert your code here ------------------------------------------------------
-
+  # filter for 2d convolution
+  binomial_filter_5_2d = np.diagflat(binomial_filter_5())
+  # convolve
+  output = scipy.signal.convolve2d(diff1, binomial_filter_5_2d, mode='valid')
   # ----------------------------------------------------------------------------
   return output
 

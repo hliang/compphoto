@@ -15,7 +15,11 @@ def video_volume(image_list):
   '''
   output = None
   # Insert your code here ------------------------------------------------------
-
+  time_len = len(image_list)
+  shape4d = (time_len, ) + image_list[0].shape
+  output = np.zeros(shape4d, dtype=np.uint8)
+  for t in range(time_len):
+    output[t] = image_list[t]
   # ----------------------------------------------------------------------------
   return output
 
@@ -30,7 +34,15 @@ def ssd(video_volume):
   '''
   output = None
   # Insert your code here ------------------------------------------------------
-
+  time_len = video_volume.shape[0]
+  output = np.zeros((time_len, time_len), dtype=np.float)
+  for i in range(time_len):
+    for j in range(time_len):
+      ssd = np.sum(np.square(video_volume[i] - video_volume[j]))
+      output[i][j] = ssd
+  print '------------'
+  print output
+  print '------------'
   # ----------------------------------------------------------------------------
   return output
 
