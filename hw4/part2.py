@@ -26,7 +26,14 @@ def find_biggest_loop(diff2, alpha):
   s = None
   f = None
   # Insert your code here ------------------------------------------------------
-
+  score = None
+  diff2len = diff2.shape[0]
+  for i in range(diff2len):
+    for j in range(diff2len):
+      if alpha * (j-i) - diff2[j][i] > score:
+        score = alpha * (j-i) - diff2[j][i]
+        # print score, alpha * (j-i), diff2[j][i], i, j
+        s, f = i, j 
   # ----------------------------------------------------------------------------
   return s, f
 
@@ -35,8 +42,8 @@ def synthesize_loop(video_volume, s, f):
   
   Input:
   video_volume - a (t, row, col, 3) array, as created by your video_volume function.
-  i - the index of the starting frame.
-  j - the index of the ending frame.
+  s - the index of the starting frame.
+  f - the index of the ending frame.
 
   Output:
   output - a list of arrays of size (row, col, 3) and dtype np.uint8, similar to
@@ -44,7 +51,8 @@ def synthesize_loop(video_volume, s, f):
   '''
   output = [] 
   # Insert your code here ------------------------------------------------------
-
+  for i in range(s, f+1):
+    output.append(video_volume[i])
   # ----------------------------------------------------------------------------
   return output
 
